@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ModalSuscribeComponent } from 'src/app/shared/components/modal-suscribe/modal-suscribe.component';
+
+declare let fbq:Function;
 
 @Component({
   selector: 'app-six-section',
@@ -16,6 +17,7 @@ export class SixSectionComponent implements OnInit {
   }
 
   openModal() {
+    fbq('track', 'Completar registro', { evento: "Click al botón 'suscribirme'" });
     this.dialog.open(ModalSuscribeComponent, {
       panelClass: "custom-modal",
       maxWidth: "95%"

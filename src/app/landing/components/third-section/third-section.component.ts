@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalButtonsBuyComponent } from 'src/app/shared/components/modal-buttons-buy/modal-buttons-buy.component';
 
+declare let fbq:Function;
+
 @Component({
   selector: 'app-third-section',
   templateUrl: './third-section.component.html',
@@ -38,6 +40,7 @@ export class ThirdSectionComponent implements OnInit {
   }
 
   openModal(promo: boolean) {
+    this.pixelEventInitPay();
     this.dialog.open(ModalButtonsBuyComponent, {
       panelClass: "custom-modal",
       maxWidth: "95%",
@@ -48,6 +51,11 @@ export class ThirdSectionComponent implements OnInit {
   }
 
   redirect() {
+    this.pixelEventInitPay();
     window.open("https://checkout.wompi.co/l/hYeApJ", "_blank");
+  }
+
+  pixelEventInitPay() {
+    fbq('track', 'Iniciar pago', { evento: "Click al botón 'comprar'" });
   }
 }
